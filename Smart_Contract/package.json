@@ -1,0 +1,12 @@
+{
+  "name": "hardhat-project",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^1.0.1",
+    "hardhat": "^2.10.2"
+  },
+  "dependencies": {
+    "ethers": "^5.7.0",
+    "openzeppelin-solidity": "^4.6.0",
+    "web3": "^1.7.5"
+  }
+}
