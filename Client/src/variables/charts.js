@@ -324,6 +324,7 @@ let chartExample1 = {
           },
           ticks: {
             callback: function (value) {
+              // console.log(value);
               if (true) {
                 return  value + "ETH";
               }
@@ -335,6 +336,7 @@ let chartExample1 = {
     tooltips: {
       callbacks: {
         label: function (item, data) {
+          // console.log(item,data);
           var label = data.datasets[item.datasetIndex].label || "";
           var yLabel = item.yLabel;
           var content = "";
@@ -344,6 +346,7 @@ let chartExample1 = {
           }
 
           content += yLabel + "ETH";
+          // console.log(content);
           return content;
         }
       }
@@ -399,6 +402,7 @@ let chartExample2 = {
       callbacks: {
         
         label: function (item, data) {
+          console.log(item,data);
           var label = data.datasets[item.datasetIndex].label || "";
           var yLabel = item.yLabel;
           var content = "";

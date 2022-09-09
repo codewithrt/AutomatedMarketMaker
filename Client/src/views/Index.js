@@ -116,14 +116,21 @@ const Index = (props) => {
       {
         label: "Price of X",
         data: Graphlabel.PriceX,
-      },
+      }
+    ],
+  };
+
+  let data2 = {
+    labels: Graphlabel.timestampxy,
+    datasets: [
       {
-        label: "Price of Y",
+        label: "Price of X",
         data: Graphlabel.PriceY,
       }
     ],
   };
   console.log(data1);
+  console.log(data2);
 
   console.log(Graphlabel);
 
@@ -153,8 +160,8 @@ const Index = (props) => {
                           href="#pablo"
                           onClick={(e) => toggleNavs(e, 1)}
                         >
-                          <span className="d-none d-md-block">Month</span>
-                          <span className="d-md-none">M</span>
+                          <span className="d-none d-md-block">Token X</span>
+                          <span className="d-md-none">X</span>
                         </NavLink>
                       </NavItem>
                       <NavItem>
@@ -166,8 +173,8 @@ const Index = (props) => {
                           href="#pablo"
                           onClick={(e) => toggleNavs(e, 2)}
                         >
-                          <span className="d-none d-md-block">Week</span>
-                          <span className="d-md-none">W</span>
+                          <span className="d-none d-md-block">Token Y</span>
+                          <span className="d-md-none">Y</span>
                         </NavLink>
                       </NavItem>
                     </Nav>
@@ -179,7 +186,7 @@ const Index = (props) => {
                 {/*  */}
                 <div className="chart">
                   <Line
-                    data={data1}
+                    data={ activeNav===1?data1:data2}
                     options={chartExample1.options}
                     getDatasetAtEvent={(e) => console.log(e)}
                   />

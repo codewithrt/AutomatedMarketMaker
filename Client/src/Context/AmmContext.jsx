@@ -97,6 +97,7 @@ const AMMProvider = (children) => {
       getEthereumContract();
       GetPriceofAllToken();
       BarGraph();
+      GetGraphlabel();
     } catch (error) {
       console.log(error);
       throw new Error("No Ethereum Object.");
@@ -309,6 +310,7 @@ const AMMProvider = (children) => {
       if (man.confirmations === 1) {
         GetPriceofAllToken();
         BarGraph();
+        GetGraphlabel();
       }
     }
     if (i === 2) {
@@ -319,6 +321,7 @@ const AMMProvider = (children) => {
       if (man.confirmations === 1) {
         GetPriceofAllToken();
         BarGraph();
+        GetGraphlabel();
       }
      
     }
@@ -329,6 +332,7 @@ const AMMProvider = (children) => {
       if (man.confirmations === 1) {
         GetPriceofAllToken();
         BarGraph();
+        GetGraphlabel();
       }
     }
     if (i === 4) {
@@ -339,6 +343,7 @@ const AMMProvider = (children) => {
       if (man.confirmations === 1) {
         GetPriceofAllToken();
         BarGraph();
+        GetGraphlabel();
       }
     }
     if (i === 5) {
@@ -349,6 +354,7 @@ const AMMProvider = (children) => {
       if (man.confirmations === 1) {
         GetPriceofAllToken();
         BarGraph();
+        GetGraphlabel();
       }
     }
     if (i === 6) {
@@ -359,11 +365,13 @@ const AMMProvider = (children) => {
       if (man.confirmations === 1) {
         GetPriceofAllToken();
         BarGraph();
+        GetGraphlabel();
       }
     }
     GetPriceofAllToken();
     GetPriceofAllToken();
     BarGraph();
+    GetGraphlabel();
   };
 
   const GetGraphlabel = async() =>{
@@ -410,13 +418,12 @@ const AMMProvider = (children) => {
       
           timestampXY.push( dateday+'/'+(datemon+1) + '  ' + timehrs+ ':' + timemin);
         
-        
-        setGraphlabel({PriceX:priceX,PriceY:priceY,timestampxy:timestampXY})
         i++;
       }
 
     }
     // settimeStamp(timestamp)
+    setGraphlabel({PriceX:priceX,PriceY:priceY,timestampxy:timestampXY})
     console.log(priceX,priceY,timestampXY);
   }
   // BarGraph
