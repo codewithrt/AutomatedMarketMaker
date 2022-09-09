@@ -324,8 +324,8 @@ let chartExample1 = {
           },
           ticks: {
             callback: function (value) {
-              if (!(value % 10)) {
-                return "$" + value + "k";
+              if (true) {
+                return  value + "ETH";
               }
             }
           }
@@ -343,7 +343,7 @@ let chartExample1 = {
             content += label;
           }
 
-          content += "$" + yLabel + "k";
+          content += yLabel + "ETH";
           return content;
         }
       }
@@ -384,9 +384,9 @@ let chartExample2 = {
         {
           ticks: {
             callback: function (value) {
-              console.log("incallback");
+              // console.log("incallback");
               if (!(value % 1)) {
-                console.log("inif");
+                // console.log("inif");
                 return value +' ' +'Orders'
                 // return value;
               }

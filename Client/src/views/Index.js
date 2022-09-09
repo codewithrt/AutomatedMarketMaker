@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 // node.js library that concatenates classes (strings)
 import classnames from "classnames";
 // javascipt plugin for creating charts
@@ -35,7 +35,7 @@ import {
   Table,
   Container,
   Row,
-  Col
+  Col,
 } from "reactstrap";
 
 // core components
@@ -43,7 +43,7 @@ import {
   chartOptions,
   parseOptions,
   chartExample1,
-  chartExample2
+  chartExample2,
 } from "variables/charts.js";
 
 import Header from "components/Headers/Header.js";
@@ -51,15 +51,22 @@ import "./button.css";
 import { AmmsContext } from "Context/AmmContext";
 
 const Index = (props) => {
-
-  const {tellhowmuchtoken,Tokensaftercalac,HandleTransactions,input,names,countss} = useContext(AmmsContext);
+  const {
+    tellhowmuchtoken,
+    Tokensaftercalac,
+    HandleTransactions,
+    input,
+    names,
+    countss,
+    Graphlabel,
+  } = useContext(AmmsContext);
   // console.log(names);
   // console.log(Tokensaftercalac);
 
   const [activeNav, setActiveNav] = useState(1);
   const [chartExample1Data, setChartExample1Data] = useState("data1");
   const [todays, settodays] = useState(null);
-const [TIME, setTIME] = useState(null)
+  const [TIME, setTIME] = useState(null);
 
   if (window.Chart) {
     parseOptions(Chart, chartOptions());
@@ -70,38 +77,55 @@ const [TIME, setTIME] = useState(null)
     setActiveNav(index);
     setChartExample1Data("data" + index);
   };
-  
+
   // console.log(names);
 
   let Bardata = {
-    labels: names ,
+    labels: names,
     datasets: [
       {
         label: "Orders",
         data: countss,
-        maxBarThickness: 10
-      }]
+        maxBarThickness: 10,
+      },
+    ],
   };
-// console.log(chartExample2.options);
-setTimeout(() => {
-  var today = new Date();
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-var yyyy = today.getFullYear();
+  // console.log(chartExample2.options);
+  // setTimeout(() => {
+  //   var today = new Date();
+  // var dd = String(today.getDate()).padStart(2, '0');
+  // var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  // var yyyy = today.getFullYear();
 
-today = mm + '/' + dd + '/' + yyyy;
-settodays(today)
-}, 1);
+  // today = mm + '/' + dd + '/' + yyyy;
+  // settodays(today)
+  // }, 1);
 
-setTimeout(() => {
-  var timeto = new Date();
-  var min = String(timeto.getMinutes()).padStart(2,'0');
-  var hours = String(timeto.getHours()).padStart(2,'0');
-  var secnd = String(timeto.getSeconds()).padStart(2,'0');
-  timeto = hours + ':' + min + ':' + secnd;
-  setTIME(timeto)
-}, 1000);
+  // setTimeout(() => {
+  //   var timeto = new Date();
+  //   var min = String(timeto.getMinutes()).padStart(2,'0');
+  //   var hours = String(timeto.getHours()).padStart(2,'0');
+  //   var secnd = String(timeto.getSeconds()).padStart(2,'0');
+  //   timeto = hours + ':' + min + ':' + secnd;
+  //   setTIME(timeto)
+  // }, 1000);
+// console.log(Graphlabel.);
+  let data1 = {
+    labels: Graphlabel.timestampxy,
+    datasets: [
+      {
+        label: "Price of X",
+        data: Graphlabel.PriceX,
+      },
+      {
+        label: "Price of Y",
+        data: Graphlabel.PriceY,
+      }
+    ],
+  };
+  console.log(data1);
 
+  console.log(Graphlabel);
 
   return (
     <>
@@ -124,7 +148,7 @@ setTimeout(() => {
                       <NavItem>
                         <NavLink
                           className={classnames("py-2 px-3", {
-                            active: activeNav === 1
+                            active: activeNav === 1,
                           })}
                           href="#pablo"
                           onClick={(e) => toggleNavs(e, 1)}
@@ -136,7 +160,7 @@ setTimeout(() => {
                       <NavItem>
                         <NavLink
                           className={classnames("py-2 px-3", {
-                            active: activeNav === 2
+                            active: activeNav === 2,
                           })}
                           data-toggle="tab"
                           href="#pablo"
@@ -155,7 +179,7 @@ setTimeout(() => {
                 {/*  */}
                 <div className="chart">
                   <Line
-                    data={chartExample1[chartExample1Data]}
+                    data={data1}
                     options={chartExample1.options}
                     getDatasetAtEvent={(e) => console.log(e)}
                   />
@@ -173,16 +197,12 @@ setTimeout(() => {
                       Performance
                     </h6>
                     <h2 className="mb-0">Today's Total orders</h2>
-                    <h4 className="mb-0">{todays + " "+ TIME } </h4>
+                    {/* <h4 className="mb-0">{todays + " "+ TIME } </h4> */}
                   </div>
                 </Row>
               </CardHeader>
               <CardBody>
                 {/* Chart */}
-
-
-
-
 
                 {/* this is the table of token tarsnfer */}
                 <div className="chart">
@@ -229,50 +249,98 @@ setTimeout(() => {
                 <tbody>
                   <tr>
                     <th scope="row">Ethereum to TokenX</th>
-                    <td><input onChange={(e)=>tellhowmuchtoken(1,e)} /></td>
+                    <td>
+                      <input onChange={(e) => tellhowmuchtoken(1, e)} />
+                    </td>
                     <td>{Tokensaftercalac.tokens1}</td>
                     <td>
-                      <button  className="btn-grad" onClick={()=>HandleTransactions(1,input.tokens1)}> Transact </button>
+                      <button
+                        className="btn-grad"
+                        onClick={() => HandleTransactions(1, input.tokens1)}
+                      >
+                        {" "}
+                        Transact{" "}
+                      </button>
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">TokenX to Ethereum</th>
-                    <td><input onChange={(e)=>tellhowmuchtoken(2,e)}/></td>
+                    <td>
+                      <input onChange={(e) => tellhowmuchtoken(2, e)} />
+                    </td>
                     <td>{Tokensaftercalac.tokens2}</td>
                     <td>
-                    <button className="btn-grad" onClick={()=>HandleTransactions(2,input.tokens2)}> Transact </button>
+                      <button
+                        className="btn-grad"
+                        onClick={() => HandleTransactions(2, input.tokens2)}
+                      >
+                        {" "}
+                        Transact{" "}
+                      </button>
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">Ethereum to TokenY</th>
-                    <td><input onChange={(e)=>tellhowmuchtoken(3,e)}/></td>
+                    <td>
+                      <input onChange={(e) => tellhowmuchtoken(3, e)} />
+                    </td>
                     <td>{Tokensaftercalac.tokens3}</td>
                     <td>
-                    <button className="btn-grad" onClick={()=>HandleTransactions(3,input.tokens3)}> Transact </button>
+                      <button
+                        className="btn-grad"
+                        onClick={() => HandleTransactions(3, input.tokens3)}
+                      >
+                        {" "}
+                        Transact{" "}
+                      </button>
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">TokenY to Ethereum</th>
-                    <td><input onChange={(e)=>tellhowmuchtoken(4,e)}/></td>
+                    <td>
+                      <input onChange={(e) => tellhowmuchtoken(4, e)} />
+                    </td>
                     <td>{Tokensaftercalac.tokens4}</td>
                     <td>
-                    <button className="btn-grad" onClick={()=>HandleTransactions(4,input.tokens4)}> Transact </button>
+                      <button
+                        className="btn-grad"
+                        onClick={() => HandleTransactions(4, input.tokens4)}
+                      >
+                        {" "}
+                        Transact{" "}
+                      </button>
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">TokenX to TokenY</th>
-                    <td><input onChange={(e)=>tellhowmuchtoken(5,e)}/></td>
+                    <td>
+                      <input onChange={(e) => tellhowmuchtoken(5, e)} />
+                    </td>
                     <td>{Tokensaftercalac.tokens5}</td>
                     <td>
-                    <button className="btn-grad" onClick={()=>HandleTransactions(5,input.tokens5)}> Transact </button>
+                      <button
+                        className="btn-grad"
+                        onClick={() => HandleTransactions(5, input.tokens5)}
+                      >
+                        {" "}
+                        Transact{" "}
+                      </button>
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">TokenY to TokenX</th>
-                    <td><input onChange={(e)=>tellhowmuchtoken(6,e)}/></td>
+                    <td>
+                      <input onChange={(e) => tellhowmuchtoken(6, e)} />
+                    </td>
                     <td>{Tokensaftercalac.tokens6}</td>
                     <td>
-                    <button className="btn-grad" onClick={()=>HandleTransactions(6,input.tokens6)}> Transact </button>
+                      <button
+                        className="btn-grad"
+                        onClick={() => HandleTransactions(6, input.tokens6)}
+                      >
+                        {" "}
+                        Transact{" "}
+                      </button>
                     </td>
                   </tr>
                 </tbody>

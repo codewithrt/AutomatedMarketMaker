@@ -32,6 +32,7 @@ const AMMProvider = (children) => {
   const [TokenYPrice, setTokenYPrice] = useState(1);
   const [PercentX, setPercentX] = useState({ text: "", arrow: "", percent: 1,timestamp: ''});
   const [PercentY, setPercentY] = useState({ text: "", arrow: "", percent: 1,timestamp:'' });
+  const [Graphlabel, setGraphlabel] = useState({PriceX:0,PriceY:0,timestampxy:0})
   const [names, setnames] = useState([]);
   const [countss, setcountss] = useState([])
   const [Tokensaftercalac, setTokensaftercalac] = useState({
@@ -103,6 +104,7 @@ const AMMProvider = (children) => {
   };
   useEffect(() => {
     checkIfWalletIsConnected();
+    GetGraphlabel();
   },[]);
 
   const GetPriceofAllToken = async () => {
@@ -370,7 +372,7 @@ const AMMProvider = (children) => {
      let i = 1;
     let priceX = [];
     let priceY = [];
-    let timestamp = [];
+    let timestampXY = [];
     // }
     // console.log("i am in");
     while (true) {
@@ -400,14 +402,22 @@ const AMMProvider = (children) => {
         priceY.push(priceofy);
         let damte = r.timestamp.toNumber();
         let times = new Date(damte*1000);
-        let time = times.getHours();
-        timestamp.push(time);
+        console.log(times);
+        let timehrs = times.getHours();
+        let timemin = times.getMinutes();
+        let dateday = times.getDate();
+        let datemon = times.getMonth();
+      
+          timestampXY.push( dateday+'/'+(datemon+1) + '  ' + timehrs+ ':' + timemin);
+        
+        
+        setGraphlabel({PriceX:priceX,PriceY:priceY,timestampxy:timestampXY})
         i++;
       }
 
     }
     // settimeStamp(timestamp)
-    // console.log(priceX,priceY,timestamp);
+    console.log(priceX,priceY,timestampXY);
   }
   // BarGraph
   const BarGraph = async()=>{
@@ -486,6 +496,7 @@ const AMMProvider = (children) => {
         connectWallet,
         names,
         countss,
+        Graphlabel
       }}
       {...children}
     />
